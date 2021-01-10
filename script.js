@@ -45,7 +45,26 @@ function generatePassword(){
     specialCharInput = confirm("4. Would you like special characters to be included?");
   };
 
-
+  var allPasswordCharacters = {
+    "lowerCharArray": [],
+    "upperCharArray": [],
+    "numberCharArray": [],
+    "specialCharArray": [],
+  };
+  
+  for (var i = 97; i <= 122; i++) {
+    allPasswordCharacters.lowerCharArray.push(String.fromCharCode(i));
+  };
+  for (var i = 65; i <= 90; i++) {
+    allPasswordCharacters.upperCharArray.push(String.fromCharCode(i));
+  };
+  for (var i = 48; i <= 57; i++) {
+    allPasswordCharacters.numberCharArray.push(String.fromCharCode(i));
+  };
+  for (var i = 32; i <= 47; i++) {
+    allPasswordCharacters.specialCharArray.push(String.fromCharCode(i));
+  };
+  
 };
 
 // once at least one criteria is selected, generate password
