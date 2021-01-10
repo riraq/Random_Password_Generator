@@ -13,11 +13,19 @@ function writePassword() {
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
-// generate prompt when "generate password" button is clicked
-document.getElementById("generate").onclick = function startGenerating() {
-  var passwordLength = prompt("How many characters would you like your password to contain? (Choose between 8-128 characters)");
+// // generate prompt when "generate password" button is clicked
+function generatePassword(){
+  var passwordLength = prompt("How many characters would you like your password to contain? (Choose a number  between 8 and 128)");
+  passwordLength = parseInt(passwordLength, 10);
 
-  // if an input other than a number between 8-128 is entered, then alert the user and ask prompt again
+  // if an input other than a number between 8-128 is entered, alert user and ask prompt again
+  while (passwordLength < 8 || passwordLength > 128) {
+    alert("Please choose between 8-128 characters!");
+    var passwordLength = prompt("How many characters would you like your password to contain? (Choose a number  between 8 and 128)");
+    passwordLength = parseInt(passwordLength, 10);
+  };
+  console.log(passwordLength)
+};
 
 // when the password length is chosen, then ask what kind of criteria is needed
 // ask if lowercase should be included
