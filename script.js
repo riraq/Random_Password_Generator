@@ -21,17 +21,32 @@ function generatePassword(){
   // if an input other than a number between 8-128 is entered, alert user and ask prompt again
   while (passwordLength < 8 || passwordLength > 128) {
     alert("Please choose between 8-128 characters!");
-    var passwordLength = prompt("How many characters would you like your password to contain? (Choose a number  between 8 and 128)");
+    passwordLength = prompt("How many characters would you like your password to contain? (Choose a number  between 8 and 128)");
     passwordLength = parseInt(passwordLength, 10);
   };
-  console.log(passwordLength)
+
+  // when the password length is chosen, then ask what kind of criteria is needed
+  alert("You will be shown four criteria that may be applied to the password. Please select at least one.");
+  // ask if lowercase should be included
+  var lowerCharInput = confirm("1. Would you like lowercase characters to be included?");
+  // ask if uppercase should be included
+  var upperCharInput = confirm("2. Would you like uppercase characters to be included?");
+  // ask if numbers should be included
+  var numberCharInput = confirm("3. Would you like number characters to be included?");
+  // ask if special characters should be included
+  var specialCharInput = confirm("4. Would you like special characters to be included?");
+
+  //confirm that at least one of the criteria above is selected; if not, go through the prompts again
+  while (lowerCharInput === false || upperCharInput === false || numberCharInput === false || specialCharInput === false) {
+    alert("Please choose at least one criteria to be applied to the password.")
+    lowerCharInput = confirm("1. Would you like lowercase characters to be included?");
+    upperCharInput = confirm("2. Would you like uppercase characters to be included?");
+    numberCharInput = confirm("3. Would you like number characters to be included?");
+    specialCharInput = confirm("4. Would you like special characters to be included?");
+  };
+
+
 };
 
-// when the password length is chosen, then ask what kind of criteria is needed
-// ask if lowercase should be included
-// ask if uppercase should be included
-// ask if numbers should be included
-// ask if special characters should be included
-//confirm that at least one of the criteria above is selected; if not, go through the prompts again
 // once at least one criteria is selected, generate password
 //once password is generated, display password
