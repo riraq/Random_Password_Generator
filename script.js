@@ -13,6 +13,30 @@ function writePassword() {
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
+// holds all possible password characters
+var allPasswordCharacters = {
+  "lowerCharArray": [],
+  "upperCharArray": [],
+  "numberCharArray": [],
+  "specialCharArray": [],
+};
+
+// generates all password characters
+for (var i = 97; i <= 122; i++) {
+  allPasswordCharacters.lowerCharArray.push(String.fromCharCode(i));
+};
+for (var i = 65; i <= 90; i++) {
+  allPasswordCharacters.upperCharArray.push(String.fromCharCode(i));
+};
+for (var i = 48; i <= 57; i++) {
+  allPasswordCharacters.numberCharArray.push(String.fromCharCode(i));
+};
+for (var i = 32; i <= 47; i++) {
+  allPasswordCharacters.specialCharArray.push(String.fromCharCode(i));
+};
+
+console.log(allPasswordCharacters)
+
 // // generate prompt when "generate password" button is clicked
 function generatePassword(){
   var passwordLength = prompt("How many characters would you like your password to contain? (Choose a number  between 8 and 128)");
@@ -37,7 +61,7 @@ function generatePassword(){
   var specialCharInput = confirm("4. Would you like special characters to be included?");
 
   //confirm that at least one of the criteria above is selected; if not, go through the prompts again
-  while (lowerCharInput === false || upperCharInput === false || numberCharInput === false || specialCharInput === false) {
+  while (lowerCharInput === false && upperCharInput === false && numberCharInput === false && specialCharInput === false) {
     alert("Please choose at least one criteria to be applied to the password.")
     lowerCharInput = confirm("1. Would you like lowercase characters to be included?");
     upperCharInput = confirm("2. Would you like uppercase characters to be included?");
@@ -45,27 +69,30 @@ function generatePassword(){
     specialCharInput = confirm("4. Would you like special characters to be included?");
   };
 
-  var allPasswordCharacters = {
-    "lowerCharArray": [],
-    "upperCharArray": [],
-    "numberCharArray": [],
-    "specialCharArray": [],
+  // once at least one criteria is selected, start to generate password
+  // array that will hold the selected characters for generating the password
+  var selectedPasswordChar = [];
+
+  // pulls the selected criteria characters and adds them to the array
+  if (lowerCharInput === true) {
+    selectedPasswordChar.push(allPasswordCharacters.lowerCharArray);
   };
-  
-  for (var i = 97; i <= 122; i++) {
-    allPasswordCharacters.lowerCharArray.push(String.fromCharCode(i));
+
+  if (upperCharInput === true) {
+    selectedPasswordChar.push(allPasswordCharacters.upperCharArray);
   };
-  for (var i = 65; i <= 90; i++) {
-    allPasswordCharacters.upperCharArray.push(String.fromCharCode(i));
+
+  if (numberCharInput === true) {
+    selectedPasswordChar.push(allPasswordCharacters.numberCharArray);
   };
-  for (var i = 48; i <= 57; i++) {
-    allPasswordCharacters.numberCharArray.push(String.fromCharCode(i));
+
+  if (specialCharInput === true) {
+    selectedPasswordChar.push(allPasswordCharacters.specialCharArray);
   };
-  for (var i = 32; i <= 47; i++) {
-    allPasswordCharacters.specialCharArray.push(String.fromCharCode(i));
-  };
-  
+
 };
 
-// once at least one criteria is selected, generate password
+// combines the characters from each character array
+// randomly select a number based on the length of the array
+// push each selected choice into the password array until the length is acheived
 //once password is generated, display password
