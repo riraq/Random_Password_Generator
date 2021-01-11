@@ -31,7 +31,7 @@ for (var i = 65; i <= 90; i++) {
 for (var i = 48; i <= 57; i++) {
   allPasswordCharacters.numberCharArray.push(String.fromCharCode(i));
 };
-for (var i = 32; i <= 47; i++) {
+for (var i = 33; i <= 47; i++) {
   allPasswordCharacters.specialCharArray.push(String.fromCharCode(i));
 };
 
@@ -40,7 +40,7 @@ for (var i = 32; i <= 47; i++) {
 function generatePassword(){
   var passwordLength = prompt("How many characters would you like your password to contain? (Choose a number  between 8 and 128)");
   passwordLength = parseInt(passwordLength, 10);
-  console.log(passwordLength)
+
   // if an input other than a number between 8-128 is entered, alert user and ask prompt again
   while (passwordLength < 8 || passwordLength > 128) {
     alert("Please choose between 8-128 characters!");
@@ -71,8 +71,6 @@ function generatePassword(){
   // once at least one criteria is selected, start to generate password
   // array that will hold the selected characters for generating the password
   var selectedPasswordChar = [];
-  console.log(selectedPasswordChar)
-  console.log(selectedPasswordChar.length)
 
   // pulls the selected criteria characters and adds them to the array
   if (lowerCharInput === true) {
@@ -103,8 +101,8 @@ function generatePassword(){
     // takes the randomly selected number, looks up that index in the characters that were selected, takes the item in that index and pushes it into the password variable
     passwordArray.push(selectedPasswordChar[randomChar][0]);
   };
-
+  var finalPassword = passwordArray.join("")
+  
+  // returns generated password into the write password function to display on page
+  return(finalPassword)
 };
-
-// push each selected choice into the password array until the length is acheived
-//once password is generated, display password
