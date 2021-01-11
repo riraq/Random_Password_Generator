@@ -35,13 +35,12 @@ for (var i = 32; i <= 47; i++) {
   allPasswordCharacters.specialCharArray.push(String.fromCharCode(i));
 };
 
-console.log(allPasswordCharacters)
 
 // // generate prompt when "generate password" button is clicked
 function generatePassword(){
   var passwordLength = prompt("How many characters would you like your password to contain? (Choose a number  between 8 and 128)");
   passwordLength = parseInt(passwordLength, 10);
-
+  console.log(passwordLength)
   // if an input other than a number between 8-128 is entered, alert user and ask prompt again
   while (passwordLength < 8 || passwordLength > 128) {
     alert("Please choose between 8-128 characters!");
@@ -72,27 +71,40 @@ function generatePassword(){
   // once at least one criteria is selected, start to generate password
   // array that will hold the selected characters for generating the password
   var selectedPasswordChar = [];
+  console.log(selectedPasswordChar)
+  console.log(selectedPasswordChar.length)
 
   // pulls the selected criteria characters and adds them to the array
   if (lowerCharInput === true) {
-    selectedPasswordChar.push(allPasswordCharacters.lowerCharArray);
+    selectedPasswordChar.push(...allPasswordCharacters.lowerCharArray);
   };
 
   if (upperCharInput === true) {
-    selectedPasswordChar.push(allPasswordCharacters.upperCharArray);
+    selectedPasswordChar.push(...allPasswordCharacters.upperCharArray);
   };
 
   if (numberCharInput === true) {
-    selectedPasswordChar.push(allPasswordCharacters.numberCharArray);
+    selectedPasswordChar.push(...allPasswordCharacters.numberCharArray);
   };
 
   if (specialCharInput === true) {
-    selectedPasswordChar.push(allPasswordCharacters.specialCharArray);
+    selectedPasswordChar.push(...allPasswordCharacters.specialCharArray);
+  };
+
+  // holds the generated password
+  var passwordArray = [];
+
+  // loops through the selected characters based on the length of the password selected
+  for (var i = 0; i < passwordLength; i++) {
+
+    // randomly select a number based on the length of the array
+    var randomChar = Math.floor(Math.random() * selectedPasswordChar.length);
+
+    // takes the randomly selected number, looks up that index in the characters that were selected, takes the item in that index and pushes it into the password variable
+    passwordArray.push(selectedPasswordChar[randomChar][0]);
   };
 
 };
 
-// combines the characters from each character array
-// randomly select a number based on the length of the array
 // push each selected choice into the password array until the length is acheived
 //once password is generated, display password
