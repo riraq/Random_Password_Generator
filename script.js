@@ -39,11 +39,19 @@ for (var i = 33; i <= 47; i++) {
 // // generate prompt when "generate password" button is clicked
 function generatePassword(){
   var passwordLength = prompt("How many characters would you like your password to contain? (Choose a number  between 8 and 128)");
+  
+  if (isNaN(passwordLength)) {
+    alert("Please input a number!");
+    return;
+  }
+  
+  else {
   passwordLength = parseInt(passwordLength, 10);
-
+  };
+  
   // if an input other than a number between 8-128 is entered, alert user and ask prompt again
   while (passwordLength < 8 || passwordLength > 128) {
-    alert("Please choose between 8-128 characters!");
+        alert("Please choose between 8-128 characters!");
     passwordLength = prompt("How many characters would you like your password to contain? (Choose a number  between 8 and 128)");
     passwordLength = parseInt(passwordLength, 10);
   };
@@ -101,8 +109,8 @@ function generatePassword(){
     // takes the randomly selected number, looks up that index in the characters that were selected, takes the item in that index and pushes it into the password variable
     passwordArray.push(selectedPasswordChar[randomChar][0]);
   };
-  var finalPassword = passwordArray.join("")
+  var finalPassword = passwordArray.join("");
   
   // returns generated password into the write password function to display on page
-  return(finalPassword)
+  return(finalPassword);
 };
